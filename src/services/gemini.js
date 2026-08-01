@@ -1,50 +1,62 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
-const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash",
-});
+console.log("Gemini Key:", API_KEY);
+
+if (!API_KEY) {
+  throw new Error("Gemini API key not found. Check your .env file.");
+}
+
+const genAI = new GoogleGenerativeAI(API_KEY);
 
 export async function analyzeComplaint(complaint) {
-  const prompt = `
+  try {
+    const model = genAI.getGenerativeModel({
+      model: "gemini-3.5-flash",
+    });
+
+    const prompt = `
 You are CivicMind AI.
 
-Analyze the following community issue and return ONLY in this format:
+Analyze this complaint:
 
-Category:
-Priority:
-Risk Score:
-Prediction:
-Recommendation:
-Reason:
+"${complaint}"
 
-Complaint:
-${complaint}
+Return ONLY valid JSON in this format:
+
+{
+  "risk": 0,
+  "priority": "LOW",
+  "confidence": 0,
+  "category": "",
+  "location": "",
+  "recommendation": ""
+}
 `;
 
-  try {
     const result = await model.generateContent(prompt);
-    return result.response.text();
-  } catch (error) {
-    console.error("Gemini API failed:", error);
 
-    // Demo fallback (used if the API quota is unavailable)
-    return `
-Category: Infrastructure
+    console.log("Raw Response:", result);
 
-Priority: High
+    const response = await result.response;
+    const text = response.text();
 
-Risk Score: 92%
+    console.log("AI Output:", text);
 
-Prediction:
-Heavy rainfall may worsen the issue and increase public safety risks.
+    const cleanText = text
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
 
-Recommendation:
-Repair the damaged infrastructure within 48 hours, inspect nearby drainage systems, and deploy a maintenance team.
+    return JSON.parse(cleanText);
+  } catch (err) {
+    console.error("FULL GEMINI ERROR:", err);
 
-Reason:
-The issue affects public safety, is likely to recur, and requires immediate attention.
-`;
+    if (err.response) {
+      console.error("Response:", err.response);
+    }
+
+    throw err;
   }
 }

@@ -1,1 +1,411 @@
 @import "tailwindcss";
+
+
+/* =====================================
+   CivicMind AI Professional Dashboard UI
+===================================== */
+
+
+body {
+
+  margin: 0;
+
+  background: #020617;
+
+  color: white;
+
+  font-family: "Inter", "Segoe UI", sans-serif;
+
+}
+
+
+
+/* Smooth scrolling */
+
+html {
+
+  scroll-behavior: smooth;
+
+}
+
+
+
+
+
+/* ===============================
+   Glass Card Style
+================================ */
+
+
+.glass {
+
+  background:
+  rgba(15,23,42,0.75);
+
+  backdrop-filter:
+  blur(15px);
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+}
+
+
+
+
+
+/* ===============================
+   Dashboard Cards
+================================ */
+
+
+.stat-card {
+
+
+  background:
+  linear-gradient(
+    145deg,
+    #0f172a,
+    #1e293b
+  );
+
+
+  border-radius:20px;
+
+
+  padding:25px;
+
+
+  border:
+  1px solid rgba(255,255,255,0.08);
+
+
+  transition:
+  all .3s ease;
+
+
+}
+
+
+
+.stat-card:hover {
+
+
+  transform:
+  translateY(-8px);
+
+
+  border-color:
+  #22d3ee;
+
+
+  box-shadow:
+
+  0 15px 40px
+  rgba(34,211,238,.15);
+
+
+}
+
+
+
+
+
+/* ===============================
+   AI Heading Glow
+================================ */
+
+
+.ai-glow {
+
+
+text-shadow:
+
+0 0 10px #22d3ee,
+
+0 0 20px #22d3ee;
+
+
+}
+
+
+
+
+
+/* ===============================
+   Buttons
+================================ */
+
+
+button {
+
+
+transition:
+all .3s ease;
+
+
+}
+
+
+
+button:hover {
+
+
+transform:
+scale(1.05);
+
+
+}
+
+
+
+
+
+/* ===============================
+   Input Fields
+================================ */
+
+
+input,
+select {
+
+
+background:
+#1e293b;
+
+
+color:white;
+
+
+border:
+
+1px solid
+rgba(255,255,255,.15);
+
+
+border-radius:10px;
+
+
+outline:none;
+
+
+transition:.3s;
+
+
+}
+
+
+
+input:focus,
+select:focus {
+
+
+border-color:#22d3ee;
+
+
+box-shadow:
+
+0 0 15px
+rgba(34,211,238,.3);
+
+
+}
+
+
+
+
+
+/* ===============================
+   Complaint Table
+================================ */
+
+
+table {
+
+
+width:100%;
+
+
+border-collapse:
+
+separate;
+
+
+border-spacing:
+
+0 12px;
+
+
+}
+
+
+
+thead th {
+
+
+background:#0f172a;
+
+
+color:#22d3ee;
+
+
+padding:16px;
+
+
+font-weight:600;
+
+
+}
+
+
+
+tbody tr {
+
+
+background:#1e293b;
+
+
+transition:.3s;
+
+
+}
+
+
+
+tbody tr:hover {
+
+
+background:#334155;
+
+
+transform:
+scale(1.01);
+
+
+}
+
+
+
+td {
+
+
+padding:16px;
+
+
+}
+
+
+
+
+
+/* ===============================
+   Scroll Bar
+================================ */
+
+
+::-webkit-scrollbar {
+
+
+width:8px;
+
+
+}
+
+
+
+::-webkit-scrollbar-track {
+
+
+background:#020617;
+
+
+}
+
+
+
+::-webkit-scrollbar-thumb {
+
+
+background:#22d3ee;
+
+
+border-radius:10px;
+
+
+}
+
+
+
+
+
+/* ===============================
+   Animations
+================================ */
+
+
+@keyframes fadeIn {
+
+
+from {
+
+opacity:0;
+
+transform:
+translateY(20px);
+
+}
+
+
+to {
+
+
+opacity:1;
+
+transform:
+translateY(0);
+
+
+}
+
+
+}
+
+
+
+.dashboard-animation {
+
+
+animation:
+fadeIn .6s ease;
+
+
+}
+
+
+
+
+
+/* ===============================
+   Mobile Responsive
+================================ */
+
+
+@media(max-width:768px){
+
+
+h1 {
+
+font-size:2.5rem!important;
+
+}
+
+
+
+table {
+
+font-size:14px;
+
+}
+
+
+}
